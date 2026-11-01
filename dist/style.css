@@ -26,3 +26,26 @@ dialog[open]{animation:dialogIn .4s var(--ease)}@keyframes dialogIn{from{opacity
 @media(max-width:600px){.hero{height:850px;min-height:0;padding-top:135px}.hero-art{bottom:-5px;width:410px;height:410px;right:-70px}.hero-index{max-width:none;bottom:25px;font-size:7px;gap:12px}.scroll-line{height:30px}.hero-bottom{margin-top:28px}.instrument-wrap{top:20px;height:330px}.instrument{border-radius:12px}.chapter{min-height:850px}.motion-ready .chapter h2,.motion-ready .chapter>p,.motion-ready .chapter-note{transform:translateY(18px)}.closing::before{right:-360px}.closing::after{right:-285px}}
 @media(prefers-reduced-motion:reduce){.hero-art,.hero .hero-art{will-change:auto;transform:rotate(-22deg)!important;opacity:1!important}.motion-ready .chapter h2,.motion-ready .chapter>p,.motion-ready .chapter-note{opacity:1;transform:none}.traces{clip-path:none}.closing::before{transform:none}.partnership:hover{transform:none}}
 .hero-art{animation-fill-mode:backwards}.traces{clip-path:none}.motion-ready .traces{clip-path:inset(0 calc((1 - var(--trace-progress,0))*100%) 0 0)}@media(prefers-reduced-motion:reduce){.motion-ready .traces{clip-path:none}}
+
+/* A compact signal becomes a connection on hover or keyboard focus. */
+.hero-bottom .discover{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-height:54px;padding:0 22px;border-radius:999px;background:#dce0d0;color:#30392a;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px #75826514;transition:background .65s var(--ease),color .5s,box-shadow .65s var(--ease),transform .55s var(--ease)}
+.hero-bottom .discover::before{content:'';position:absolute;inset:-40%;background:#303b28;border-radius:50%;transform:translateY(100%) scale(.6);transition:transform .8s var(--ease);z-index:-1}
+.hero-bottom .discover::after{content:'';position:absolute;left:22px;right:22px;bottom:0;width:auto;height:1px;background:#a9b88a;transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease);opacity:.8}
+.discover-label{height:18px;line-height:18px;display:block;position:relative;overflow:hidden;font-size:12px}
+.discover-label>span{display:block;margin:0;transition:transform .7s var(--ease)}
+.discover-label>span+span{position:absolute;top:100%;left:0;white-space:nowrap;opacity:.8}
+.discover-signal{display:flex;align-items:center;justify-content:center;gap:3px;width:25px;height:24px;flex-shrink:0;position:relative}
+.discover-signal i{width:2px;height:5px;border-radius:2px;background:currentColor;transition:transform .65s var(--ease),opacity .65s;transform-origin:center}
+.discover-signal i:nth-child(2),.discover-signal i:nth-child(4){height:11px}.discover-signal i:nth-child(3){height:19px}
+.hero-bottom .discover:is(:hover,:focus-visible){color:#f1f2e8;background:#dce0d0;box-shadow:0 8px 24px #28361e14;transform:translateY(-2px)}
+.hero-bottom .discover:is(:hover,:focus-visible)::before{transform:translateY(0) scale(1)}
+.hero-bottom .discover:is(:hover,:focus-visible)::after{transform:scaleX(1)}
+.discover:is(:hover,:focus-visible) .discover-label>span{transform:translateY(-100%)}
+.discover:is(:hover,:focus-visible) .discover-signal i{animation:connectionPulse 1.15s ease-in-out infinite;animation-delay:calc(var(--delay,0)*90ms)}
+.discover-signal i:nth-child(2){--delay:1}.discover-signal i:nth-child(3){--delay:2}.discover-signal i:nth-child(4){--delay:3}.discover-signal i:nth-child(5){--delay:4}
+@keyframes connectionPulse{0%,100%{transform:scaleY(.55);opacity:.6}50%{transform:scaleY(1);opacity:1}}
+.hero-bottom .discover:active{transform:translateY(0) scale(.97);transition-duration:.15s}
+@media(hover:none){.hero-bottom .discover:active{background:#303b28;color:#f1f2e8}.discover-signal i{animation:connectionPulse 2.2s ease-in-out 2;animation-delay:calc(var(--delay,0)*90ms)}}
+@media(max-width:600px){.hero-bottom .discover{margin-top:24px;gap:25px;min-height:52px;padding:0 20px}.discover-label{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.hero-bottom .discover:is(:hover,:focus-visible),.hero-bottom .discover:active{transform:none}.discover-label>span+span{display:none}.discover:is(:hover,:focus-visible) .discover-label>span{transform:none}.hero-bottom .discover:is(:hover,:focus-visible){background:#303b28}}
+.hero-bottom .discover>span{margin-left:0}
