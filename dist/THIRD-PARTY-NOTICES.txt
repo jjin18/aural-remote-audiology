@@ -1,6 +1,13 @@
-Adapted button: BHARGAVPATEL1244 / great-catfish-18
+Aural interaction references
+
+The user supplied Uiverse.io button and striped-light examples by
+uiverse-astronaut and dexter-st. The current pill interaction and striped
+signal field are substantially rebuilt adaptations, with native link/button
+semantics, responsive SVG, keyboard focus and optional reduced motion.
+
+An earlier button iteration used BHARGAVPATEL1244 / great-catfish-18.
 Source: https://github.com/uiverse-io/galaxy/blob/adbd2adde0a299a3956ea288fb444ec01891ca41/Buttons/BHARGAVPATEL1244_great-catfish-18.html
-Changes: Aural colors, link semantics, touch sizing, keyboard focus and reduced-motion support.
+
 MIT License
 
 Copyright (c) 2023 Uiverse.io
@@ -22,16 +29,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-
-Additional component: Uiverse.io by dexter-st, rotating light loader.
-Source supplied by user. Adapted wording to Audiology; semantic link, keyboard focus,
-contrast floor, touch sizing and reduced-motion fallback added.
-
-Current hero button: Uiverse.io by uiverse-astronaut, cir-btn.
-Source supplied by user. Adapted to remote audiology wording, site colors,
-anchor semantics and reduced-motion support. Replaces the dexter-st loader.
-
-Sound-light effect: Uiverse.io by dexter-st, striped moving gradient loader.
-Source supplied by user. Adapted to decorative sound waves without loader text,
-muted site colors, responsive sizing and reduced-motion support.
