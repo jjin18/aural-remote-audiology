@@ -9,17 +9,5 @@ document.querySelector('#enquiry-form').addEventListener('submit',event=>{event.
 
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const clamp=value=>Math.min(1,Math.max(0,value));
-// Pointer-controlled light and bounded tilt; touch keeps a static highlight.
-const discover=document.querySelector('.discover');
-const finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
-let lightFrame=0;
-let lightPosition={x:.5,y:.5};
-function paintLight(){lightFrame=0;const {x,y}=lightPosition;discover.style.setProperty('--light-x',`${x*100}%`);discover.style.setProperty('--light-y',`${y*100}%`);discover.style.setProperty('--tilt-x',`${(.5-y)*7}deg`);discover.style.setProperty('--tilt-y',`${(x-.5)*9}deg`);}
-discover.addEventListener('pointermove',event=>{if(!finePointer.matches||reducedMotion.matches)return;const rect=discover.getBoundingClientRect();lightPosition={x:clamp((event.clientX-rect.left)/rect.width),y:clamp((event.clientY-rect.top)/rect.height)};if(!lightFrame)lightFrame=requestAnimationFrame(paintLight);});
-function resetLight(){if(lightFrame)cancelAnimationFrame(lightFrame);lightFrame=0;lightPosition={x:.5,y:.5};paintLight();}
-discover.addEventListener('pointerleave',resetLight);
-discover.addEventListener('blur',resetLight);
-reducedMotion.addEventListener('change',resetLight);
-
 
 window.addEventListener('scroll',()=>document.documentElement.classList.toggle('has-scrolled',window.scrollY>25),{passive:true});
