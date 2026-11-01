@@ -23,3 +23,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+Additional component: Uiverse.io by dexter-st, rotating light loader.
+Source supplied by user. Adapted wording to Audiology; semantic link, keyboard focus,
+contrast floor, touch sizing and reduced-motion fallback added.
+
+Current hero button: Uiverse.io by uiverse-astronaut, cir-btn.
+Source supplied by user. Adapted to remote audiology wording, site colors,
+anchor semantics and reduced-motion support. Replaces the dexter-st loader.
