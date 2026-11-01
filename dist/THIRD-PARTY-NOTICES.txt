@@ -3,7 +3,7 @@ Aural interaction references
 The user supplied Uiverse.io button and striped-light examples by
 uiverse-astronaut and dexter-st. The current pill interaction and striped
 signal field are substantially rebuilt adaptations, with native link/button
-semantics, responsive SVG, keyboard focus and optional reduced motion.
+semantics, responsive SVG, keyboard focus and a reduced-motion fallback.
 
 An earlier button iteration used BHARGAVPATEL1244 / great-catfish-18.
 Source: https://github.com/uiverse-io/galaxy/blob/adbd2adde0a299a3956ea288fb444ec01891ca41/Buttons/BHARGAVPATEL1244_great-catfish-18.html
@@ -11,6 +11,110 @@ Source: https://github.com/uiverse-io/galaxy/blob/adbd2adde0a299a3956ea288fb444e
 MIT License
 
 Copyright (c) 2023 Uiverse.io
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------------
+Motion 14.9.0 — bundled mini animation runtime
+-----------------------------------------------------------------------
+Source: https://github.com/motiondivision/motion/tree/v14.9.0
+Package export: motion/mini
+Package metadata: https://raw.githubusercontent.com/motiondivision/motion/v14.9.0/packages/motion/package.json
+License source: https://github.com/motiondivision/motion/blob/v14.9.0/LICENSE.md
+Local license copy: vendor/MOTION-LICENSE.md
+
+The pinned mini API is bundled locally for this static site. Motion powers
+entry animation and scroll-scrubbed typography; no React runtime is used.
+
+The MIT License (MIT)
+
+Copyright (c) 2024 [Motion](https://motion.dev) B.V.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------------
+CSS Mesh — organic morph keyframes
+-----------------------------------------------------------------------
+Source: https://github.com/stevesouth/css-mesh
+Adapted source: https://raw.githubusercontent.com/stevesouth/css-mesh/main/src/lib/css-mesh/animations/morph-animation.ts
+Related reference: https://raw.githubusercontent.com/stevesouth/css-mesh/main/src/lib/css-mesh/themes/base-themes.ts
+License source: https://raw.githubusercontent.com/stevesouth/css-mesh/main/LICENSE
+
+The six-stage translate/scale/rotate keyframe pattern is adapted into the
+site's liquid-morph CSS animation. Timing, amplitude, radial light fields,
+colors and reduced-motion behavior are customized for Aural. The React
+component library is not included.
+
+MIT License
+
+Copyright (c) 2024 Steve South
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------------------------------------------------------------------
+Codrops — On-Scroll Typography Animations, effect6
+-----------------------------------------------------------------------
+Source: https://github.com/codrops/OnScrollTypographyAnimations
+Adapted source: https://raw.githubusercontent.com/codrops/OnScrollTypographyAnimations/main/src/js/index.js
+Demo/article: https://tympanus.net/codrops/2023/01/18/on-scroll-typography-animations/
+License source: https://raw.githubusercontent.com/codrops/OnScrollTypographyAnimations/main/LICENSE
+
+The perspective, X-axis rotation, upward movement and staggered opacity
+reveal of effect6 are adapted to whole words with restrained distances.
+The implementation uses Motion mini and native scrolling. Codrops' GSAP,
+Lenis, Splitting, fonts and image assets are not included.
+
+MIT License
+
+Copyright (c) 2009 - 2022 [Codrops](https://tympanus.net/codrops)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

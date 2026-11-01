@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f5f5f7">
+  <meta name="theme-color" content="#111319">
   <meta name="description" content="Aural is building the operating system for remote diagnostic audiology. Your ENT clinic. Remote expertise. One connected experience.">
   <title>Aural — Audiology. Now remote.</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317191d'/%3E%3Ctext x='13' y='46' font-family='Arial' font-size='48' fill='white'%3Ea%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
-  <script defer src="app.js"></script>
+  <link rel="modulepreload" href="vendor/motion-mini.js">
+  <script type="module" src="app.js"></script>
 </head>
 <body>
   <a class="skip" href="#clinic">Skip to clinic workflow</a>
@@ -18,12 +19,14 @@
   </header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
+      <div class="light-field" aria-hidden="true"><i class="light-cloud cloud-ice"></i><i class="light-cloud cloud-pearl"></i><i class="light-cloud cloud-violet"></i></div>
       <div class="hero-copy">
         <p class="eyebrow hero-intro">Remote audiology for ENT</p>
         <h1 id="hero-title"><span class="line"><span>Audiology.</span></span><span class="line"><span class="remote-word">Now remote.</span></span></h1>
-        <div class="hero-cta"><a class="button button-dark" href="#clinic"><span class="button-label">Explore remote audiology</span><span class="button-indicator" aria-hidden="true"><i></i></span></a></div>
+        <div class="hero-cta"><a class="button button-dark" href="demo/"><span class="button-label">Experience the demo</span><span class="button-indicator" aria-hidden="true"><i></i></span></a></div>
       </div>
       <div class="sound-field" aria-hidden="true">
+        <canvas class="sound-canvas"></canvas>
         <svg class="sound-svg" preserveAspectRatio="none" viewBox="0 0 1200 280" fill="none">
           <defs>
             <linearGradient id="signal-metal" x1="0" y1="0" x2="600" y2="280" gradientUnits="userSpaceOnUse"><stop stop-color="#596d8b"/><stop offset=".4" stop-color="#9eacc6"/><stop offset=".7" stop-color="#7c7c8d"/><stop offset="1" stop-color="#c5b6a7"/></linearGradient>
@@ -36,7 +39,7 @@
           <g transform="translate(600 0)"><g class="signal-packet signal-packet-right"><use href="#signal-bars" stroke="url(#signal-metal)" stroke-width="1.6"/><g mask="url(#signal-mask)"><rect class="signal-light" x="0" y="0" width="600" height="280" fill="url(#signal-light)"/></g></g></g>
         </svg>
       </div>
-      <div class="hero-foot" aria-hidden="true"><span class="scroll-mark"></span></div>
+
     </section>
 
     <section class="journey" id="clinic" aria-label="The remote audiology workflow">
@@ -48,7 +51,7 @@
             <div class="chart-title"><span>Pure-tone audiogram</span><span>dB HL</span></div>
             <svg class="audiogram" viewBox="0 0 600 340" role="img" aria-labelledby="chart-desc"><title id="chart-desc">Conceptual audiogram with illustrative left and right ear channels. No patient information.</title><g class="grid"><path d="M55 30H565 M55 90H565 M55 150H565 M55 210H565 M55 270H565 M55 330H565 M55 30V330 M157 30V330 M259 30V330 M361 30V330 M463 30V330 M565 30V330"/></g><g class="axis"><text x="48" y="17">250</text><text x="145" y="17">500</text><text x="247" y="17">1k</text><text x="349" y="17">2k</text><text x="451" y="17">4k</text><text x="553" y="17">8k</text><text x="10" y="36">0</text><text x="4" y="96">20</text><text x="4" y="156">40</text><text x="4" y="216">60</text><text x="4" y="276">80</text><text x="0" y="336">100</text></g><g class="traces"><path class="right-trace" pathLength="1" d="M55 84L157 102L259 90L361 132L463 165L565 147"/><path class="left-trace" pathLength="1" d="M55 111L157 126L259 114L361 153L463 189L565 174"/><g class="right-points"><circle cx="55" cy="84" r="6"/><circle cx="157" cy="102" r="6"/><circle cx="259" cy="90" r="6"/><circle cx="361" cy="132" r="6"/><circle cx="463" cy="165" r="6"/><circle cx="565" cy="147" r="6"/></g><path class="left-points" d="M49 105l12 12m0-12l-12 12 M151 120l12 12m0-12l-12 12 M253 108l12 12m0-12l-12 12 M355 147l12 12m0-12l-12 12 M457 183l12 12m0-12l-12 12 M559 168l12 12m0-12l-12 12"/></g></svg>
             <div class="chart-frequency">Frequency / Hz</div>
-            <div class="instrument-foot"><span id="review-state">01 / PREPARE</span><span>Illustrative data · No patient information</span></div>
+            <div class="instrument-foot"><span id="review-state">Prepare</span><span>Illustrative data · No patient information</span></div>
             <div class="session-link"><span>ENT clinic</span><span class="connection-track" aria-hidden="true"><i></i></span><span>Remote audiologist</span></div>
             <div class="session-progress" aria-hidden="true"><i></i></div>
           </div>
@@ -56,21 +59,18 @@
         <div class="chapters">
           <article class="chapter" data-step="0">
             <div class="chapter-copy" data-reveal>
-              <p class="step-label">01 / In the room</p>
               <h2><span class="word">Your</span><br><span class="word">clinic.</span></h2>
               <p class="chapter-description">The patient. Your assistant.<br>Calibrated equipment.</p>
             </div>
           </article>
           <article class="chapter" data-step="1">
             <div class="chapter-copy" data-reveal>
-              <p class="step-label">02 / Beyond the room</p>
               <h2><span class="word">Remote</span><br><span class="word">expertise.</span></h2>
               <p class="chapter-description">A licensed audiologist.<br>Right there, remotely.</p>
             </div>
           </article>
           <article class="chapter" data-step="2">
             <div class="chapter-copy" data-reveal>
-              <p class="step-label">03 / Together</p>
               <h2><span class="word">One</span> <span class="word">connected</span><br><span class="word">experience.</span></h2>
               <p class="chapter-description">Testing. Interpretation.<br>Documentation.</p>
             </div>
@@ -83,16 +83,16 @@
       <div class="technology-heading" data-reveal>
         <h2 id="technology-title"><span class="word">Local</span> <span class="word">precision.</span><br><span class="word text-metal">Remote</span> <span class="word text-metal">control.</span></h2>
       </div>
-      <div class="technology-detail" data-reveal><span class="detail-rule" aria-hidden="true"></span><p>A software layer in development.<br>Connecting the clinic to the clinician.</p></div>
+      <div class="technology-detail" data-reveal><p>A software layer in development.<br>Connecting the clinic to the clinician.</p></div>
     </section>
 
     <section class="closing" aria-labelledby="closing-title">
+      <div class="light-field closing-light" aria-hidden="true"><i class="light-cloud cloud-ice"></i><i class="light-cloud cloud-pearl"></i></div>
       <div data-reveal><h2 id="closing-title"><span class="word">Closer</span> <span class="word">to</span><br><span class="word">your</span> <span class="word">patients.</span></h2>
       <div class="closing-bottom"><button class="button button-light partnership" type="button"><span class="button-label">Explore a partnership</span><span class="button-indicator" aria-hidden="true"><i></i></span></button></div></div>
-      <div class="closing-signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
   </main>
-  <footer><a class="brand" href="#">aural</a><div class="footer-options"><button class="motion-toggle" type="button" aria-label="Enable animations" aria-pressed="false" hidden><span class="motion-switch" aria-hidden="true"></span><span class="motion-label">Motion off</span></button><span>© <span id="year">2026</span> Aural</span></div></footer>
+  <footer><a class="brand" href="#">aural</a><span>© <span id="year">2026</span> Aural</span></footer>
 
   <dialog aria-labelledby="enquiry-title" aria-describedby="enquiry-description">
     <form method="dialog"><button class="close" aria-label="Close partnership enquiry">×</button></form>
