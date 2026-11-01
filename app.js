@@ -6,3 +6,30 @@ const dialog=document.querySelector('dialog');
 document.querySelector('.closing .partnership').addEventListener('click',()=>dialog.showModal());
 dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
 document.querySelector('#enquiry-form').addEventListener('submit',event=>{event.preventDefault();const clinic=document.querySelector('#clinic-name').value.trim();const needs=document.querySelector('#needs').value.trim();if(!clinic||!needs)return;const content=`AURAL / PARTNERSHIP BRIEF\n\nOrganization: ${clinic}\n\nCoverage needs:\n${needs}\n\nPrepared locally. This brief has not been sent to Aural.\nA contact channel has not yet been announced.\n`;const url=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='aural-partnership-brief.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);document.querySelector('#form-status').textContent='Your brief is ready. Nothing has been sent.';});
+
+// Coalesce native scroll events into one frame. No scroll interception or inertia.
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+const hero=document.querySelector('.hero');
+const closing=document.querySelector('.closing');
+const chapters=[...document.querySelectorAll('.chapter')];
+const clamp=value=>Math.min(1,Math.max(0,value));
+let framePending=false;
+function renderScroll(){
+  framePending=false;
+  const vh=window.innerHeight;
+  const rect=journey.getBoundingClientRect();
+  const progress=clamp((vh*.65-rect.top)/(rect.height-vh*.2));
+  journey.style.setProperty('--session-progress',progress);
+  journey.style.setProperty('--trace-progress',clamp((progress-.12)/.58));
+  if(!reducedMotion.matches){
+    hero.style.setProperty('--hero-scroll',clamp(-hero.getBoundingClientRect().top/hero.offsetHeight));
+    closing.style.setProperty('--closing-progress',clamp((vh-closing.getBoundingClientRect().top)/vh));
+  }
+  chapters.forEach(chapter=>{const r=chapter.getBoundingClientRect();chapter.classList.toggle('is-visible',r.top<vh*.8&&r.bottom>vh*.2);});
+}
+function scheduleScroll(){if(!framePending){framePending=true;requestAnimationFrame(renderScroll);}}
+if('IntersectionObserver' in window){document.documentElement.classList.add('motion-ready');}
+window.addEventListener('scroll',scheduleScroll,{passive:true});
+window.addEventListener('resize',scheduleScroll,{passive:true});
+reducedMotion.addEventListener('change',scheduleScroll);
+renderScroll();
