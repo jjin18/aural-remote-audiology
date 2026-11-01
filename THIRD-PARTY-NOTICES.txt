@@ -31,3 +31,7 @@ contrast floor, touch sizing and reduced-motion fallback added.
 Current hero button: Uiverse.io by uiverse-astronaut, cir-btn.
 Source supplied by user. Adapted to remote audiology wording, site colors,
 anchor semantics and reduced-motion support. Replaces the dexter-st loader.
+
+Sound-light effect: Uiverse.io by dexter-st, striped moving gradient loader.
+Source supplied by user. Adapted to decorative sound waves without loader text,
+muted site colors, responsive sizing and reduced-motion support.
