@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101115">
+  <meta name="description" content="An interactive, simulated Aural audiology session. No clinical hardware, audio or patient data.">
+  <title>Aural — the connected session</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317191d'/%3E%3Ctext x='13' y='46' font-family='Arial' font-size='48' fill='white'%3Ea%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="demo.css">
+  <script defer src="demo.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to session</a>
+  <header class="demo-header">
+    <a class="brand" href="../" aria-label="Aural home">aural</a>
+    <details class="demo-disclosure"><summary aria-label="Demo information">Demo</summary><p>Simulated equipment. No audio or patient data. This is not a clinical record.</p></details>
+    <a class="icon-control back-link" href="../" aria-label="Back to Aural" title="Back to Aural" data-tooltip="Back to Aural"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m14 5-7 7 7 7"/></svg></a>
+  </header>
+  <main id="workspace" tabindex="-1">
+    <nav class="stage-navigation" aria-label="Demo workflow"><button class="icon-control" type="button" data-stage="prepare" aria-label="Clinic" title="Clinic" data-tooltip="Clinic" aria-current="step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21V5l7-2 7 2v16M3 21h18M9 21v-5h6v5M9 8h6M12 5v6"/></svg></button><button class="icon-control" type="button" data-stage="connect" aria-label="Connection" title="Connection" data-tooltip="Connection" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 15 6-6M8 17l-1 1a4.25 4.25 0 0 1-6-6l4-4a4.25 4.25 0 0 1 6 0M16 7l1-1a4.25 4.25 0 0 1 6 6l-4 4a4.25 4.25 0 0 1-6 0" transform="translate(1 0) scale(.92)"/></svg></button><button class="icon-control" type="button" data-stage="test" aria-label="Test" title="Test" data-tooltip="Test" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10v4M7.5 6v12M12 3v18M16.5 6v12M21 10v4"/></svg></button><button class="icon-control" type="button" data-stage="review" aria-label="Review" title="Review" data-tooltip="Review" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 3H6v18h12V6zM14 3v5h5M9 12h6M9 16h4"/></svg></button></nav>
+    <div class="workspace">
+      <div class="stage-area">
+        <section class="stage" data-panel="prepare" aria-labelledby="prepare-title">
+          <h1 class="sr-only" id="prepare-title" tabindex="-1">Clinic preparation</h1>
+          <fieldset class="readiness"><legend class="sr-only">Simulated clinic readiness</legend><label class="readiness-icon" title="Assistant ready" data-tooltip="Assistant ready"><input id="ready-assistant" type="checkbox" name="ready" value="assistant" aria-label="Assistant ready Onsite preparation and patient support"><span class="readiness-art" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3M8 15v6M16 15v6"/></svg><i></i></span></label><label class="readiness-icon" title="Equipment prepared" data-tooltip="Equipment prepared"><input id="ready-equipment" type="checkbox" name="ready" value="equipment" aria-label="Equipment prepared Simulated calibrated audiometer and transducers"><span class="readiness-art" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 10h5M7 14h3M15 10v4M13 12h4"/></svg><i></i></span></label><label class="readiness-icon" title="Room ready" data-tooltip="Room ready"><input id="ready-room" type="checkbox" name="ready" value="room" aria-label="Room ready Demonstration environment check"><span class="readiness-art" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21V3h14v18M3 21h18M10 21V7h6v14M13 14h.01"/></svg><i></i></span></label></fieldset>
+          <button class="primary icon-control" id="prepare-next" type="button" aria-label="Connect the clinician" title="Connect the clinician" data-tooltip="Connect the clinician" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 15 6-6M8 17l-1 1a4.25 4.25 0 0 1-6-6l4-4a4.25 4.25 0 0 1 6 0M16 7l1-1a4.25 4.25 0 0 1 6 6l-4 4a4.25 4.25 0 0 1-6 0" transform="translate(1 0) scale(.92)"/></svg></button>
+        </section>
+        <section class="stage" data-panel="connect" aria-labelledby="connect-title" hidden>
+          <h1 class="sr-only" id="connect-title" tabindex="-1">Connection</h1>
+          <div class="connection-scene" aria-hidden="true"><span class="endpoint endpoint-clinic"></span><span class="connection-flow"><i></i><i></i><i></i></span><span class="endpoint endpoint-remote"></span></div>
+          <p class="sr-only" id="connection-state">Clinic ready. Awaiting demo connection.</p>
+          <button class="primary icon-control" id="connect-action" type="button" aria-label="Connect demo clinician" title="Connect demo clinician" data-tooltip="Connect demo clinician" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 15 6-6M8 17l-1 1a4.25 4.25 0 0 1-6-6l4-4a4.25 4.25 0 0 1 6 0M16 7l1-1a4.25 4.25 0 0 1 6 6l-4 4a4.25 4.25 0 0 1-6 0" transform="translate(1 0) scale(.92)"/></svg></button>
+        </section>
+        <section class="stage" data-panel="test" aria-labelledby="test-title" hidden>
+          <h1 class="sr-only" id="test-title" tabindex="-1">Test controls</h1>
+          <div class="control-deck">
+            <fieldset class="ear-control"><legend class="sr-only">Ear channel</legend><label><input type="radio" name="ear" value="L" aria-label="Left" checked><span>L <b aria-hidden="true">×</b></span></label><label><input type="radio" name="ear" value="R" aria-label="Right"><span>R <b aria-hidden="true">○</b></span></label></fieldset>
+            <div class="test-controls">
+              <label class="frequency-control" for="frequency"><span class="sr-only">Frequency</span><select id="frequency"><option value="250">250 Hz</option><option value="500">500 Hz</option><option value="1000" selected>1,000 Hz</option><option value="2000">2,000 Hz</option><option value="4000">4,000 Hz</option><option value="8000">8,000 Hz</option></select></label>
+              <div class="level-control"><label for="level"><span class="sr-only">Stimulus level</span><output id="level-output" for="level">35 dB HL</output></label><input id="level" aria-label="Stimulus level" type="range" min="0" max="100" step="5" value="35"></div>
+            </div>
+          </div>
+          <p class="sr-only" id="signal-response">Ready to present a simulated signal.</p>
+          <div class="test-actions"><button class="primary icon-control" id="present-signal" type="button" aria-label="Present signal" title="Present signal" data-tooltip="Present signal" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10v4M7.5 6v12M12 3v18M16.5 6v12M21 10v4"/></svg></button> <button class="icon-control" id="run-example" type="button" aria-label="Run example session" title="Run example session" data-tooltip="Run example session" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 5 8 7-8 7zM13 5l8 7-8 7z"/></svg></button> <button class="icon-control cancel-action" id="cancel-sequence" type="button" aria-label="Stop sequence" title="Stop sequence" data-tooltip="Stop sequence" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg></button> <button class="icon-control review-action" id="review-next" type="button" aria-label="Review session" title="Review session" data-tooltip="Review session" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 3H6v18h12V6zM14 3v5h5M9 12h6M9 16h4"/></svg></button></div>
+        </section>
+        <section class="stage" data-panel="review" aria-labelledby="review-title" hidden>
+          <h1 class="sr-only" id="review-title" tabindex="-1">Session review</h1>
+          <div class="sr-only"><strong id="result-count">0</strong><span>recorded demo points</span><p id="review-completeness">No points recorded.</p></div>
+          <div class="review-actions"><button class="primary icon-control" id="download-summary" type="button" aria-label="Save demo summary" title="Save demo summary" data-tooltip="Save demo summary" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg></button> <button class="icon-control" id="return-test" type="button" aria-label="Return to testing" title="Return to testing" data-tooltip="Return to testing" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10v4M7.5 6v12M12 3v18M16.5 6v12M21 10v4"/></svg></button></div>
+        </section>
+        <p class="sr-only" id="session-message" role="status" aria-live="polite" aria-atomic="true">Select the three readiness checks to begin.</p>
+      </div>
+      <aside class="session-visual" aria-labelledby="visual-title">
+        <div class="ambient-light" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="session-surface">
+          <div class="surface-top"><span id="visual-title" class="sr-only">The connected session</span><span class="connection-badge" id="connection-badge" role="img" aria-label="Not connected" title="Not connected"><i aria-hidden="true"></i></span><span id="point-count" aria-label="Recorded demo points">0 / 12</span></div>
+          <div class="signal-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="chart-heading"><span class="sr-only">Illustrative session trace</span><span>dB HL</span></div>
+          <svg id="session-chart" viewBox="0 0 600 350" role="img" aria-labelledby="chart-title chart-description">
+            <title id="chart-title">Simulated stimulus levels by ear and frequency</title><desc id="chart-description">The graph is initially empty. Recorded points are demonstration stimulus settings, not measured hearing thresholds.</desc>
+            <g class="chart-grid" fill="none"><path d="M52 36H568 M52 95H568 M52 154H568 M52 213H568 M52 272H568 M52 331H568 M52 36V331 M155.2 36V331 M258.4 36V331 M361.6 36V331 M464.8 36V331 M568 36V331"/></g>
+            <g class="chart-axis"><text x="52" y="20">250</text><text x="155" y="20">500</text><text x="258" y="20">1k</text><text x="362" y="20">2k</text><text x="465" y="20">4k</text><text x="568" y="20">8k</text><text x="32" y="41">0</text><text x="32" y="100">20</text><text x="32" y="159">40</text><text x="32" y="218">60</text><text x="32" y="277">80</text><text x="32" y="336">100</text></g>
+            <g id="chart-points"></g>
+          </svg>
+          <div class="chart-foot"><span>Hz</span><div class="chart-legend"><span class="left-legend" aria-label="Left channel">× L</span><span class="right-legend" aria-label="Right channel">○ R</span></div></div>
+          <div class="session-completion"><label class="sr-only" for="session-progress" id="progress-label">Awaiting clinic preparation</label><progress id="session-progress" max="12" value="0">0 of 12 demo points</progress></div>
+        </div>
+      </aside>
+    </div>
+    <section class="results-section sr-only" id="results-section" aria-labelledby="results-title" hidden><h2 id="results-title">Recorded demonstration stimulus settings and virtual responses</h2><table><thead><tr><th scope="col">Channel</th><th scope="col">Frequency</th><th scope="col">Level</th><th scope="col">Virtual response</th></tr></thead><tbody id="results-body"></tbody></table></section>
+  </main>
+  <footer><button class="icon-control" id="reset-demo" type="button" aria-label="Reset demo" title="Reset demo" data-tooltip="Reset demo" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></svg></button></footer>
+  <noscript><p class="no-script">This interactive demonstration needs JavaScript. Return to <a href="../">Aural</a> to explore the workflow.</p></noscript>
+</body>
+</html>
