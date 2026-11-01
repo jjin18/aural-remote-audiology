@@ -45,3 +45,18 @@ function resetLight(){if(lightFrame)cancelAnimationFrame(lightFrame);lightFrame=
 discover.addEventListener('pointerleave',resetLight);
 discover.addEventListener('blur',resetLight);
 reducedMotion.addEventListener('change',resetLight);
+
+// Shared pointer response: bounded travel, one scheduled paint per frame, no idle loop.
+const materialSurfaces=[hero,document.querySelector('.instrument'),document.querySelector('.technology'),closing,...document.querySelectorAll('.partnership')];
+materialSurfaces.forEach(surface=>{
+ let scheduled=0;let px=.5;let py=.5;
+ function paint(){scheduled=0;surface.style.setProperty('--surface-x',`${px*100}%`);surface.style.setProperty('--surface-y',`${py*100}%`);surface.style.setProperty('--surface-rx',`${(.5-py)*4}deg`);surface.style.setProperty('--surface-ry',`${(px-.5)*6}deg`);if(surface===hero){surface.style.setProperty('--drift-x',`${(px-.5)*20}px`);surface.style.setProperty('--drift-y',`${(py-.5)*14}px`);surface.style.setProperty('--ring-x',`${(px-.5)*12}px`);surface.style.setProperty('--ring-y',`${(py-.5)*10}px`);}}
+ function reset(){if(scheduled)cancelAnimationFrame(scheduled);px=py=.5;paint();}
+ surface.addEventListener('pointermove',event=>{if(!finePointer.matches||reducedMotion.matches)return;const r=surface.getBoundingClientRect();px=clamp((event.clientX-r.left)/r.width);py=clamp((event.clientY-r.top)/r.height);if(!scheduled)scheduled=requestAnimationFrame(paint);},{passive:true});
+ surface.addEventListener('pointerleave',reset);reducedMotion.addEventListener('change',reset);
+});
+if('IntersectionObserver' in window){const reveal=new IntersectionObserver(entries=>{entries.forEach(entry=>entry.target.classList.toggle('in-view',entry.isIntersecting));},{threshold:.12});document.querySelectorAll('.technology,.closing').forEach(el=>reveal.observe(el));}
+let navigationFrame=0;
+function updateNavigation(){navigationFrame=0;document.documentElement.classList.toggle('has-scrolled',window.scrollY>25);const range=document.documentElement.scrollHeight-window.innerHeight;document.documentElement.style.setProperty('--reading-progress',range>0?clamp(window.scrollY/range):0);}
+window.addEventListener('scroll',()=>{if(!navigationFrame)navigationFrame=requestAnimationFrame(updateNavigation);},{passive:true});
+window.addEventListener('resize',updateNavigation,{passive:true});updateNavigation();
