@@ -1,0 +1,7 @@
+# Aural — remote diagnostic audiology
+
+Buildless, dependency-free frontend. Serve `dist/` with any static HTTP server. Relative asset paths support GitHub Pages project hosting.
+
+The Aural name is a proposed identity. All session UI and plotted values are conceptual. No clinical claims, customers, approvals, or patient information are represented. The enquiry interaction downloads a local brief; it does not send or retain information.
+
+Deployment: publish the contents of `dist/` to a `gh-pages` branch, or upload the GitHub Pages zip. Sites hosting configuration is in `.openai/hosting.json`.
