@@ -1,5 +1,14 @@
 # Validation — November 1, 2026
 
+## Custom domain and HTTPS
+
+- Connected trypurelyhearing.com to the existing GitHub Pages deployment. Network Solutions now has the four GitHub Pages apex A records and www CNAME pointing to jjin18.github.io, with 15-minute TTLs. Existing nameservers were retained.
+- Google and Cloudflare public DNS both resolve the new records; neither returns the previous parking address. No apex AAAA, CAA or DNSSEC DS records were returned.
+- GitHub confirmed the certificate exists and is usable after refreshing the custom-domain configuration. Enforce HTTPS is checked and enabled.
+- Verified the homepage and direct demo over HTTPS without bypassing certificate warnings. HTTP and the secure www address both reach https://trypurelyhearing.com/.
+- The secure demo automatically completed all twelve points, with no browser warnings or errors.
+- GitHub's separate DNS-check panel intermittently reports NotServedByPagesError despite the working secure site and correct public DNS responses. No additional DNS changes were made on that basis.
+
 ## Purely Hearing rebrand
 
 - Removed the demo signup popup, its JavaScript, styles and unused configuration. The Experience the demo link navigates directly to the automatic demo; verified in the browser.
