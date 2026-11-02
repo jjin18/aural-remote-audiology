@@ -1,4 +1,4 @@
-Aural interaction references
+Purely Hearing interaction references
 
 The user supplied Uiverse.io button and striped-light examples by
 uiverse-astronaut and dexter-st. The current pill interaction and striped
@@ -74,7 +74,7 @@ License source: https://raw.githubusercontent.com/stevesouth/css-mesh/main/LICEN
 
 The six-stage translate/scale/rotate keyframe pattern is adapted into the
 site's liquid-morph CSS animation. Timing, amplitude, radial light fields,
-colors and reduced-motion behavior are customized for Aural. The React
+colors and reduced-motion behavior are customized for Purely Hearing. The React
 component library is not included.
 
 MIT License

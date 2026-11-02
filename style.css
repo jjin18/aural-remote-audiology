@@ -1,4 +1,4 @@
-/* Aural: native scrolling, fluid light, and a deliberately small visual system. */
+/* Purely Hearing: native scrolling, fluid light, and a deliberately small visual system. */
 :root{--paper:#f5f5f7;--ink:#1c1e22;--night:#111319;--muted:#a1a7b1;--ease:cubic-bezier(.22,1,.36,1);--session-progress:0;--trace-progress:1;color-scheme:dark}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:82px}body{margin:0;background:var(--night);color:#f6f6f8;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}body:has(dialog[open]){overflow:hidden}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}button{cursor:pointer}:is(button,a,input,textarea):focus-visible{outline:3px solid #93b5e6;outline-offset:6px}::selection{background:#6d87b0;color:white}h1,h2,p{margin:0}h1,h2{font-weight:550;letter-spacing:-.065em;line-height:1.04}.skip{position:fixed;z-index:30;top:12px;left:16px;padding:14px 20px;background:white;color:#12141a;border-radius:8px;transform:translateY(-160%)}.skip:focus{transform:none}
 .site-header{position:fixed;inset:0 0 auto;z-index:10;height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 max(6%,calc((100vw - 1320px)/2));transition:background .5s}.has-scrolled .site-header{background:#111319d9;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}.brand{min-height:44px;display:inline-flex;gap:9px;align-items:center;font-size:32px;font-weight:600;letter-spacing:-1.8px;line-height:1}.brand-signal{display:flex;gap:2px;align-items:center}.brand-signal i{width:2px;height:9px;border-radius:3px;background:currentColor}.brand-signal i:nth-child(2){height:17px}.brand-signal i:nth-child(3){height:12px}.nav-link{min-height:44px;display:inline-flex;align-items:center;font-size:13px;font-weight:500;color:#d8dce4;transition:color .3s}.nav-link:hover{color:white}.link-line{display:none}.eyebrow{font-size:12px;letter-spacing:.025em;line-height:1.6;color:#acb3c0}
@@ -23,20 +23,7 @@ dialog{color-scheme:light;border:0;border-radius:20px;background:#f5f5f7;color:#
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.light-cloud{animation:quiet-light 14s ease-in-out infinite alternate;will-change:opacity}.cloud-pearl{animation-delay:-7s}.cloud-violet{animation-delay:-3s}.remote-word{animation-duration:24s}.hero-copy,.instrument,.word{transform:none!important}.button,.button-label,.button-indicator i{transition:background .3s,opacity .3s;transform:none!important}.button::before{transition:opacity .4s;transform:none;opacity:0}.button:is(:hover,:focus-visible)::before{opacity:.7}}
 @keyframes quiet-light{from{opacity:.35}to{opacity:.9}}
 
-/* Demo invitation: a quiet, accessible consent step. */
-.signup-dialog{max-width:530px}
-.signup-dialog[open]{animation:signup-in .5s var(--ease)}
-.signup-dialog h2{font-size:clamp(40px,8vw,55px)}
-.signup-dialog [hidden]{display:none!important}
-.signup-dialog input[type="email"]{border:0;border-radius:12px;background:#e9ebf0;padding:15px 16px}
-.signup-dialog .signup-consent{display:flex;align-items:flex-start;gap:12px;margin-top:21px;font-size:12px;line-height:1.65;color:#616a78;cursor:pointer}
-.signup-consent input{width:19px;height:19px;flex:0 0 19px;margin:2px 0 0;padding:0;accent-color:#252c38}
-.signup-dialog .signup-note{margin-top:25px;font-size:13px;color:#667080}
-.signup-actions{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:9px}
-.signup-actions .button{margin-top:12px}
-.signup-skip,.signup-booking{font-size:12px;line-height:1.5;min-height:44px;display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:4px;color:#556176}
-.signup-dialog #signup-status{font-size:12px;line-height:1.6;margin-top:14px;color:#4d617b}
-.signup-dialog #signup-status:empty{display:none}
-.signup-dialog button:disabled{cursor:wait;opacity:.65;transform:none}
-@keyframes signup-in{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.signup-dialog[open]{animation:none}}
+/* A compact wordmark leaves room for the clinical navigation on small screens. */
+.brand{font-size:26px;letter-spacing:-.85px;white-space:nowrap}.mini-brand{font-size:18px;letter-spacing:-.5px}footer .brand{font-size:22px}
+@media(max-width:760px){.site-header{gap:18px}.brand{font-size:21px;letter-spacing:-.65px}.mini-brand{font-size:16px}.instrument-top{gap:10px}footer{gap:14px;flex-wrap:wrap}footer .brand{font-size:20px}}
+@media(max-width:360px){.brand{font-size:19px}.site-header{gap:12px}.nav-link{font-size:11px}.mini-brand{font-size:15px}footer>span{font-size:10px}}

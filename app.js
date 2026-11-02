@@ -1,4 +1,3 @@
-import { SIGNUP_CONFIG } from './signup-config.js';
 import { animate } from './vendor/motion-mini.js';
 
 const root = document.documentElement;
@@ -195,85 +194,11 @@ document.querySelector('#enquiry-form').addEventListener('submit', event => {
   const clinic = document.querySelector('#clinic-name').value.trim();
   const needs = document.querySelector('#needs').value.trim();
   if (!clinic || !needs) return;
-  const content = `AURAL / PARTNERSHIP BRIEF\n\nOrganization: ${clinic}\n\nCoverage needs:\n${needs}\n\nPrepared locally. This brief has not been sent to Aural.\nA contact channel has not yet been announced.\n`;
+  const content = `PURELY HEARING / PARTNERSHIP BRIEF\n\nOrganization: ${clinic}\n\nCoverage needs:\n${needs}\n\nPrepared locally. This brief has not been sent to Purely Hearing.\nA contact channel has not yet been announced.\n`;
   const url = URL.createObjectURL(new Blob([content], {type: 'text/plain;charset=utf-8'}));
   const link = document.createElement('a');
-  link.href = url; link.download = 'aural-partnership-brief.txt';
+  link.href = url; link.download = 'purely-hearing-partnership-brief.txt';
   document.body.append(link); link.click(); link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   document.querySelector('#form-status').textContent = 'Your brief is ready. Nothing has been sent.';
-});
-
-// A subscription is only confirmed after the configured server acknowledges it.
-// No email addresses or consent records are stored in this static frontend.
-const signupDialog = document.querySelector('#signup-dialog');
-const demoTrigger = document.querySelector('#experience-demo');
-const signupForm = document.querySelector('#signup-form');
-const signupStatus = document.querySelector('#signup-status');
-const signupSubmit = document.querySelector('#signup-submit');
-function configuredUrl(value, {sameOrigin = false} = {}) {
-  if (!value) return '';
-  try {
-    const url = new URL(value, location.href);
-    return url.protocol === 'https:' || (sameOrigin && url.origin === location.origin && url.protocol === 'http:') ? url.href : '';
-  } catch { return ''; }
-}
-const signupEndpoint = configuredUrl(SIGNUP_CONFIG.endpoint, {sameOrigin: true});
-const bookingUrl = configuredUrl(SIGNUP_CONFIG.bookingUrl);
-if (signupEndpoint) {
-  signupForm.hidden = false;
-  document.querySelector('#signup-unavailable').hidden = true;
-  document.querySelector('#signup-description').textContent = 'See the demo. Stay close to what comes next.';
-  document.querySelector('#watch-demo').className = 'signup-skip';
-  document.querySelector('#watch-demo .button-label').textContent = 'Watch without subscribing';
-}
-if (bookingUrl) {
-  const bookingLink = document.querySelector('#signup-booking');
-  bookingLink.href = bookingUrl;
-  bookingLink.hidden = false;
-}
-demoTrigger.addEventListener('click', event => {
-  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  event.preventDefault();
-  signupDialog.showModal();
-});
-signupDialog.addEventListener('close', () => demoTrigger.focus({preventScroll: true}));
-signupDialog.addEventListener('click', event => {
-  if (event.target !== signupDialog) return;
-  const box = signupDialog.getBoundingClientRect();
-  if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) signupDialog.close();
-});
-let signupRequest = null;
-let signupPending = false;
-signupForm.addEventListener('submit', async event => {
-  event.preventDefault();
-  if (!signupEndpoint || signupPending || !signupForm.reportValidity()) return;
-  const email = document.querySelector('#signup-email').value.trim();
-  if (!email || !document.querySelector('#signup-consent').checked) return;
-  if (!signupRequest || signupRequest.email !== email) signupRequest = {email, requestId: crypto.randomUUID()};
-  signupPending = true;
-  signupSubmit.disabled = true;
-  signupSubmit.querySelector('.button-label').textContent = 'Connecting…';
-  signupStatus.textContent = '';
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-  try {
-    const response = await fetch(signupEndpoint, {
-      method: 'POST', credentials: 'omit', signal: controller.signal,
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({...signupRequest, newsletterConsent: true, consentVersion: '2026-11-01', source: 'aural-demo'})
-    });
-    const result = await response.json();
-    if (!response.ok || result.subscribed !== true || result.followUpQueued !== true) throw new Error('Subscription not confirmed.');
-    signupStatus.textContent = 'You’re subscribed. Your follow-up email is on its way.';
-    signupForm.reset();
-    if (signupDialog.open) location.assign('demo/');
-  } catch {
-    signupStatus.textContent = 'We couldn’t confirm your signup. Please try again, or watch the demo below.';
-  } finally {
-    clearTimeout(timeout);
-    signupPending = false;
-    signupSubmit.disabled = false;
-    signupSubmit.querySelector('.button-label').textContent = 'Subscribe & watch';
-  }
 });

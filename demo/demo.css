@@ -39,3 +39,8 @@ body[data-channel="R"] .ambient-light i:first-child{opacity:.3}
 @keyframes point-arrival{from{opacity:0}to{opacity:var(--point-opacity,1)}}
 @media(min-width:761px) and (max-height:950px){.session-surface>svg{max-height:clamp(150px,calc(100svh - 490px),350px)}}
 @media(max-width:760px) and (max-height:780px){.demo-header{height:62px}.signal-visual{height:60px}}
+
+/* Wordmark proportions for Purely Hearing. */
+.demo-header{grid-template-columns:minmax(0,1fr) auto 48px;gap:20px}.brand{font-size:25px;letter-spacing:-.8px;white-space:nowrap}
+@media(max-width:760px){.demo-header{grid-template-columns:minmax(0,1fr) auto 44px;gap:15px}.brand{font-size:21px;letter-spacing:-.7px}}
+@media(max-width:360px){.demo-header{gap:10px}.brand{font-size:19px;letter-spacing:-.6px}}
