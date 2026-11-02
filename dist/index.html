@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#111319">
-  <meta name="description" content="Aural is building the operating system for remote diagnostic audiology. Your ENT clinic. Remote expertise. One connected experience.">
-  <title>Aural — Audiology. Now remote.</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317191d'/%3E%3Ctext x='13' y='46' font-family='Arial' font-size='48' fill='white'%3Ea%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="Purely Hearing is building the operating system for remote diagnostic audiology. Your ENT clinic. Remote expertise. One connected experience.">
+  <title>Purely Hearing — Audiology. Now remote.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317191d'/%3E%3Ctext x='12' y='41' font-family='Arial' font-size='26' font-weight='600' fill='white'%3EPH%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
   <link rel="modulepreload" href="vendor/motion-mini.js">
   <script type="module" src="app.js"></script>
@@ -14,7 +14,7 @@
 <body>
   <a class="skip" href="#clinic">Skip to clinic workflow</a>
   <header class="site-header">
-    <a class="brand" href="#" aria-label="Aural home">aural<span class="brand-signal" aria-hidden="true"><i></i><i></i><i></i></span></a>
+    <a class="brand" href="#" aria-label="Purely Hearing home">Purely Hearing<span class="brand-signal" aria-hidden="true"><i></i><i></i><i></i></span></a>
     <a class="nav-link" href="#clinic">For your clinic<span class="link-line" aria-hidden="true"></span></a>
   </header>
   <main>
@@ -46,7 +46,7 @@
       <div class="journey-inner">
         <div class="instrument-wrap">
           <div class="instrument">
-            <div class="instrument-top"><span class="mini-brand">aural<span> / session</span></span><span class="concept">Concept interface</span></div>
+            <div class="instrument-top"><span class="mini-brand">Purely Hearing</span><span class="concept">Concept interface</span></div>
             <div class="session-status"><span class="status-light" aria-hidden="true"></span><span id="session-state">Equipment readiness</span><span class="channels"><span>L ×</span><span>R ○</span></span></div>
             <div class="chart-title"><span>Pure-tone audiogram</span><span>dB HL</span></div>
             <svg class="audiogram" viewBox="0 0 600 340" role="img" aria-labelledby="chart-desc"><title id="chart-desc">Conceptual audiogram with illustrative left and right ear channels. No patient information.</title><g class="grid"><path d="M55 30H565 M55 90H565 M55 150H565 M55 210H565 M55 270H565 M55 330H565 M55 30V330 M157 30V330 M259 30V330 M361 30V330 M463 30V330 M565 30V330"/></g><g class="axis"><text x="48" y="17">250</text><text x="145" y="17">500</text><text x="247" y="17">1k</text><text x="349" y="17">2k</text><text x="451" y="17">4k</text><text x="553" y="17">8k</text><text x="10" y="36">0</text><text x="4" y="96">20</text><text x="4" y="156">40</text><text x="4" y="216">60</text><text x="4" y="276">80</text><text x="0" y="336">100</text></g><g class="traces"><path class="right-trace" pathLength="1" d="M55 84L157 102L259 90L361 132L463 165L565 147"/><path class="left-trace" pathLength="1" d="M55 111L157 126L259 114L361 153L463 189L565 174"/><g class="right-points"><circle cx="55" cy="84" r="6"/><circle cx="157" cy="102" r="6"/><circle cx="259" cy="90" r="6"/><circle cx="361" cy="132" r="6"/><circle cx="463" cy="165" r="6"/><circle cx="565" cy="147" r="6"/></g><path class="left-points" d="M49 105l12 12m0-12l-12 12 M151 120l12 12m0-12l-12 12 M253 108l12 12m0-12l-12 12 M355 147l12 12m0-12l-12 12 M457 183l12 12m0-12l-12 12 M559 168l12 12m0-12l-12 12"/></g></svg>
@@ -92,7 +92,7 @@
       <div class="closing-bottom"><button class="button button-light partnership" type="button"><span class="button-label">Explore a partnership</span><span class="button-indicator" aria-hidden="true"><i></i></span></button></div></div>
     </section>
   </main>
-  <footer><a class="brand" href="#">aural</a><span>© <span id="year">2026</span> Aural</span></footer>
+  <footer><a class="brand" href="#">Purely Hearing</a><span>© <span id="year">2026</span> Purely Hearing</span></footer>
 
   <dialog id="partnership-dialog" aria-labelledby="enquiry-title" aria-describedby="enquiry-description">
     <form method="dialog"><button class="close" aria-label="Close partnership enquiry">×</button></form>
@@ -106,21 +106,6 @@
     </form>
     <p class="privacy">No enquiry is sent or stored. A contact channel has not yet been announced. Please do not include patient information.</p>
     <p id="form-status" role="status"></p>
-  </dialog>
-  <dialog id="signup-dialog" class="signup-dialog" aria-labelledby="signup-title" aria-describedby="signup-description">
-    <form method="dialog"><button class="close" aria-label="Close demo signup">×</button></form>
-    <p class="eyebrow">Aural / remote audiology</p>
-    <h2 id="signup-title">Stay connected.</h2>
-    <p id="signup-description">Explore the connected clinical experience.</p>
-    <form id="signup-form" hidden>
-      <label for="signup-email">Work email</label>
-      <input id="signup-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@clinic.com">
-      <label class="signup-consent" for="signup-consent"><input id="signup-consent" name="newsletterConsent" type="checkbox" required><span>Send me Aural updates and a follow-up email with details and a link to choose a call time. I can unsubscribe at any time.</span></label>
-      <button class="button button-dark" id="signup-submit" type="submit"><span class="button-label">Subscribe &amp; watch</span></button>
-    </form>
-    <p id="signup-unavailable" class="signup-note">Email signup is not connected yet. You can watch the demo now.</p>
-    <p id="signup-status" role="status" aria-live="polite"></p>
-    <div class="signup-actions"><a class="button button-dark" id="watch-demo" href="demo/"><span class="button-label">Watch the demo</span></a><a class="signup-booking" id="signup-booking" href="#" hidden>Choose a call time</a></div>
   </dialog>
   <noscript><p class="no-script">Partnership enquiries: a contact channel has not yet been announced.</p></noscript>
 </body>

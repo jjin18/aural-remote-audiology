@@ -1,5 +1,13 @@
 # Validation — November 1, 2026
 
+## Purely Hearing rebrand
+
+- Removed the demo signup popup, its JavaScript, styles and unused configuration. The Experience the demo link navigates directly to the automatic demo; verified in the browser.
+- Updated public branding, document titles, metadata, accessible labels, favicons and download names to Purely Hearing. Internal model identifiers are unchanged.
+- Checked homepage widths 320, 390, 768, 1024 and 1440: no horizontal overflow or wordmark/navigation collision. The demo header also fits at 320px with separated brand, disclosure and back control.
+- Verified automatic playback starts after direct navigation. No browser warnings or errors. All eleven existing tests and JavaScript syntax checks pass.
+- Prepared static Vercel configuration using dist/ without build or installation dependencies.
+
 ## Automatic walkthrough update
 
 - Verified a fresh load reaches review with all twelve points, without clicks or keyboard focus changes. The completed frame holds until replay or interaction.
@@ -8,7 +16,7 @@
 - Rechecked 320, 390, 768, 1024 and 1440 widths: no horizontal overflow. Controls remain within the opening viewport; stage space is reserved across transitions.
 - Full-motion transitions inspected through the ignored local media-preference fixture. Signal packets converge, panels fade, and only new chart segments animate. The normal browser's reduced-motion setting still auto-advances without spatial effects.
 - Hidden-tab pause/resume is implemented and source-reviewed using the tested clock; the available browser surface did not expose a real hidden-document state during tab switching.
-- Signup entry opens a separate dialog. With no sending endpoint configured, it collects no email and provides a working demo link. Sender preference is jiahui.k.jin@gmail.com. Automatic email, newsletter persistence and call booking are not live: a sending integration and booking URL are still required. No subscription or email delivery is claimed or tested.
+- The signup experiment was subsequently removed at the user's request. No email addresses are collected or sent by this website.
 
 ## Landing page
 
