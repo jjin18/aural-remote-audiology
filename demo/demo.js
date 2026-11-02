@@ -62,6 +62,11 @@ if (typeof document !== 'undefined') (() => {
   let busy = '';
   let operation = 0;
   const timers = new Set();
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const panelAnimations = new Map();
+  let tourActive = false;
+  let resumeWhenVisible = false;
+  let chartSignature = '';
 
   function schedule(callback, delay, token = operation) {
     const timer = setTimeout(() => {
@@ -100,8 +105,30 @@ if (typeof document !== 'undefined') (() => {
   function setStage(next, {focus = true, message = ''} = {}) {
     if (!stages.includes(next) || !allowed(next)) return false;
     if (busy) stopOperations();
+    const previous = stage;
     stage = next;
-    $$('[data-panel]').forEach(panel => { panel.hidden = panel.dataset.panel !== stage; });
+    document.body.dataset.stage = stage;
+    $$('[data-panel]').forEach(panel => {
+      panelAnimations.get(panel)?.cancel();
+      const current = panel.dataset.panel === stage;
+      panel.inert = !current;
+      panel.setAttribute('aria-hidden', String(!current));
+      if (previous === stage || reducedMotion.matches || !panel.animate) {
+        panel.hidden = !current;
+      } else if (current || panel.dataset.panel === previous) {
+        panel.hidden = false;
+        const animation = panel.animate(current
+          ? [{opacity: 0, transform: 'translateY(8px)'}, {opacity: 1, transform: 'translateY(0)'}]
+          : [{opacity: 1, transform: 'translateY(0)'}, {opacity: 0, transform: 'translateY(-5px)'}],
+        {duration: current ? 850 : 320, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both'});
+        panelAnimations.set(panel, animation);
+        animation.onfinish = () => {
+          if (!current && panel.dataset.panel !== stage) panel.hidden = true;
+          animation.cancel();
+          panelAnimations.delete(panel);
+        };
+      } else panel.hidden = true;
+    });
     $('#results-section').hidden = stage !== 'review';
     if (message) setMessage(message);
     else setMessage('');
@@ -167,23 +194,41 @@ if (typeof document !== 'undefined') (() => {
   }
   function drawChart() {
     const group = $('#chart-points');
-    group.replaceChildren();
     const records = model.getRecords();
+    const signature = JSON.stringify(records);
+    if (signature === chartSignature) return;
+    chartSignature = signature;
+    const keep = new Set();
+    function retain(key, create) {
+      keep.add(key);
+      let node = [...group.children].find(child => child.dataset.key === key);
+      if (!node) {
+        node = create();
+        node.dataset.key = key;
+        group.append(node);
+        if (!reducedMotion.matches) node.classList.add('chart-arrival');
+      }
+      return node;
+    }
     for (const ear of ['L', 'R']) {
       const points = records.filter(point => point.ear === ear).map(point => ({...point, x: 52 + FREQUENCIES.indexOf(point.frequency) * 103.2, y: 36 + point.level * 2.95}));
-      if (points.length > 1) {
-        group.append(svgElement('path', {d: points.map((point, index) => `${index ? 'L' : 'M'}${point.x} ${point.y}`).join(' '), class: ear === 'L' ? 'trace-left' : 'trace-right'}));
-      }
+      points.slice(1).forEach((point, index) => {
+        const previous = points[index];
+        const node = retain(`line-${ear}-${point.frequency}`, () => svgElement('path', {class: ear === 'L' ? 'trace-left' : 'trace-right', pathLength: 1}));
+        node.setAttribute('d', `M${previous.x} ${previous.y}L${point.x} ${point.y}`);
+      });
       for (const point of points) {
-        const shape = ear === 'L'
+        const shape = retain(`point-${ear}-${point.frequency}-${point.level}-${point.response}`, () => ear === 'L'
           ? svgElement('path', {d: `M${point.x - 5} ${point.y - 5}l10 10m0-10l-10 10`, class: `point-left${point.response ? '' : ' no-response'}`})
-          : svgElement('circle', {cx: point.x, cy: point.y, r: 5, class: `point-right${point.response ? '' : ' no-response'}`});
-        const title = svgElement('title', {});
-        title.textContent = describePoint(point);
-        shape.append(title);
-        group.append(shape);
+          : svgElement('circle', {cx: point.x, cy: point.y, r: 5, class: `point-right${point.response ? '' : ' no-response'}`}));
+        if (!shape.querySelector('title')) {
+          const title = svgElement('title', {});
+          title.textContent = describePoint(point);
+          shape.append(title);
+        }
       }
     }
+    [...group.children].forEach(node => { if (!keep.has(node.dataset.key)) node.remove(); });
     $('#chart-description').textContent = records.length
       ? `${records.length} illustrative stimulus settings have been recorded. These are demonstration values and virtual responses, not measured hearing thresholds. The full values are available in the review table.`
       : 'The graph is empty. Recorded points are demonstration stimulus settings, not measured hearing thresholds.';
@@ -200,6 +245,99 @@ if (typeof document !== 'undefined') (() => {
       });
       body.append(row);
     }
+  }
+
+  function playbackState(state) {
+    const playing = state === 'playing';
+    document.body.dataset.playback = state;
+    document.body.classList.toggle('is-walkthrough', tourActive);
+    document.body.classList.toggle('walkthrough-paused', tourActive && !playing);
+    const button = $('#toggle-playback');
+    const label = playing ? 'Pause walkthrough' : state === 'paused' ? 'Resume walkthrough' : 'Play walkthrough';
+    setButtonLabel(button, label);
+    button.querySelector('svg').innerHTML = playing ? '<path d="M9 6v12M15 6v12"/>' : '<path d="m8 5 11 7-11 7z"/>';
+    panelAnimations.forEach(animation => tourActive && state === 'paused' ? animation.pause() : animation.play());
+  }
+  function prepareFrame(check) {
+    model.setReady(check, true);
+    $(`#ready-${check}`).checked = true;
+    updateUI();
+  }
+  const tourSteps = [
+    {at: 1000, run: () => prepareFrame('assistant')},
+    {at: 2100, run: () => prepareFrame('equipment')},
+    {at: 3200, run: () => prepareFrame('room')},
+    {at: 4500, run: () => setStage('connect', {focus: false, message: 'The prepared clinic connects with a remote audiologist.'})},
+    {at: 5100, run: () => {
+      busy = 'connecting';
+      document.body.classList.add('is-connecting');
+      updateUI();
+    }},
+    {at: 7400, run: () => {
+      model.connect();
+      busy = '';
+      document.body.classList.remove('is-connecting');
+      updateUI();
+    }},
+    {at: 9100, run: () => setStage('test', {focus: false, message: 'The remote clinician presents simulated signals to each ear. The clinic remains connected.'})}
+  ];
+  const tourSignals = ['L', 'R'].flatMap(ear => FREQUENCIES.map((frequency, index) => ({ear, frequency, level: EXAMPLE_LEVELS[ear][index]})));
+  tourSignals.forEach((signal, index) => {
+    tourSteps.push({at: 10600 + index * 1100, run: () => {
+      applySignal(signal);
+      document.body.classList.add('is-presenting');
+      document.body.dataset.channel = signal.ear;
+      $('#signal-response').textContent = `${signal.ear === 'L' ? 'Left' : 'Right'} channel · ${formatHz(signal.frequency)} · presenting…`;
+    }});
+    tourSteps.push({at: 11250 + index * 1100, run: () => {
+      const point = model.record(signal.ear, signal.frequency, signal.level);
+      document.body.classList.remove('is-presenting');
+      $('#signal-response').textContent = describePoint(point);
+      updateUI();
+    }});
+  });
+  tourSteps.push({at: 24700, run: () => setStage('review', {focus: false, message: 'The simulated session is complete. Both channels are ready for clinician review and documentation. You can replay or explore the controls.'})});
+  tourSteps.push({at: 26200, run: () => {}});
+  const timeline = new AuralTimeline(tourSteps, {onState: playbackState});
+  function clearSession() {
+    stopOperations();
+    model.reset();
+    $$('input[name="ready"]').forEach(input => { input.checked = false; });
+    applySignal({ear: 'L', frequency: 1000, level: 35});
+    document.body.dataset.channel = '';
+    $('#signal-response').textContent = 'Ready to present a simulated signal.';
+    $('#results-body').replaceChildren();
+    setStage('prepare', {focus: false, message: 'Automatic walkthrough. An onsite assistant prepares the clinic and equipment.'});
+  }
+  function startWalkthrough() {
+    timeline.reset();
+    tourActive = true;
+    clearSession();
+    timeline.play();
+    if (document.hidden) { resumeWhenVisible = true; timeline.pause(); }
+  }
+  function takeControl() {
+    if (!tourActive) return;
+    tourActive = false;
+    resumeWhenVisible = false;
+    timeline.cancel();
+    stopOperations();
+    updateUI();
+    setMessage('Automatic playback stopped. Explore the controls, or replay the walkthrough.');
+  }
+  $('#toggle-playback').addEventListener('click', () => {
+    resumeWhenVisible = false;
+    if (timeline.state === 'playing') timeline.pause();
+    else if (timeline.state === 'paused') timeline.play();
+    else startWalkthrough();
+  });
+  $('#replay-walkthrough').addEventListener('click', startWalkthrough);
+  // Changing controls must never race the guided sequence or lose keyboard focus.
+  for (const container of [$('.stage-area'), $('.stage-navigation')]) {
+    container.addEventListener('pointerdown', takeControl, {capture: true});
+    container.addEventListener('focusin', takeControl);
+    container.addEventListener('click', takeControl, {capture: true});
+    container.addEventListener('change', takeControl, {capture: true});
   }
 
   $$('input[name="ready"]').forEach(input => input.addEventListener('change', () => {
@@ -313,16 +451,22 @@ if (typeof document !== 'undefined') (() => {
     setMessage('Demo summary downloaded. Nothing has been sent.');
   });
   $('#reset-demo').addEventListener('click', () => {
-    stopOperations();
-    model.reset();
-    $$('input[name="ready"]').forEach(input => { input.checked = false; });
-    applySignal({ear: 'L', frequency: 1000, level: 35});
-    $('#signal-response').textContent = 'Ready to present a simulated signal.';
+    takeControl();
+    clearSession();
     setStage('prepare', {message: 'Demo reset. Select the three readiness checks to begin.'});
-    $('#results-body').replaceChildren();
   });
-  document.addEventListener('visibilitychange', () => document.body.classList.toggle('tab-hidden', document.hidden));
-  window.addEventListener('pagehide', () => stopOperations());
-  window.addEventListener('pageshow', updateUI);
+  function syncVisibility() {
+    document.body.classList.toggle('tab-hidden', document.hidden);
+    if (document.hidden) {
+      if (timeline.state === 'playing') { resumeWhenVisible = true; timeline.pause(); }
+    } else if (resumeWhenVisible) { resumeWhenVisible = false; timeline.play(); }
+  }
+  document.addEventListener('visibilitychange', syncVisibility);
+  window.addEventListener('pagehide', () => {
+    if (timeline.state === 'playing') { resumeWhenVisible = true; timeline.pause(); }
+    if (!tourActive) stopOperations();
+  });
+  window.addEventListener('pageshow', () => { syncVisibility(); updateUI(); });
   updateUI();
+  startWalkthrough();
 })();

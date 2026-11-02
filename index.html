@@ -23,7 +23,7 @@
       <div class="hero-copy">
         <p class="eyebrow hero-intro">Remote audiology for ENT</p>
         <h1 id="hero-title"><span class="line"><span>Audiology.</span></span><span class="line"><span class="remote-word">Now remote.</span></span></h1>
-        <div class="hero-cta"><a class="button button-dark" href="demo/"><span class="button-label">Experience the demo</span><span class="button-indicator" aria-hidden="true"><i></i></span></a></div>
+        <div class="hero-cta"><a class="button button-dark" id="experience-demo" href="demo/"><span class="button-label">Experience the demo</span><span class="button-indicator" aria-hidden="true"><i></i></span></a></div>
       </div>
       <div class="sound-field" aria-hidden="true">
         <canvas class="sound-canvas"></canvas>
@@ -94,7 +94,7 @@
   </main>
   <footer><a class="brand" href="#">aural</a><span>© <span id="year">2026</span> Aural</span></footer>
 
-  <dialog aria-labelledby="enquiry-title" aria-describedby="enquiry-description">
+  <dialog id="partnership-dialog" aria-labelledby="enquiry-title" aria-describedby="enquiry-description">
     <form method="dialog"><button class="close" aria-label="Close partnership enquiry">×</button></form>
     <p class="eyebrow">Let’s build what’s next</p>
     <h2 id="enquiry-title">Start closer.</h2>
@@ -106,6 +106,21 @@
     </form>
     <p class="privacy">No enquiry is sent or stored. A contact channel has not yet been announced. Please do not include patient information.</p>
     <p id="form-status" role="status"></p>
+  </dialog>
+  <dialog id="signup-dialog" class="signup-dialog" aria-labelledby="signup-title" aria-describedby="signup-description">
+    <form method="dialog"><button class="close" aria-label="Close demo signup">×</button></form>
+    <p class="eyebrow">Aural / remote audiology</p>
+    <h2 id="signup-title">Stay connected.</h2>
+    <p id="signup-description">Explore the connected clinical experience.</p>
+    <form id="signup-form" hidden>
+      <label for="signup-email">Work email</label>
+      <input id="signup-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@clinic.com">
+      <label class="signup-consent" for="signup-consent"><input id="signup-consent" name="newsletterConsent" type="checkbox" required><span>Send me Aural updates and a follow-up email with details and a link to choose a call time. I can unsubscribe at any time.</span></label>
+      <button class="button button-dark" id="signup-submit" type="submit"><span class="button-label">Subscribe &amp; watch</span></button>
+    </form>
+    <p id="signup-unavailable" class="signup-note">Email signup is not connected yet. You can watch the demo now.</p>
+    <p id="signup-status" role="status" aria-live="polite"></p>
+    <div class="signup-actions"><a class="button button-dark" id="watch-demo" href="demo/"><span class="button-label">Watch the demo</span></a><a class="signup-booking" id="signup-booking" href="#" hidden>Choose a call time</a></div>
   </dialog>
   <noscript><p class="no-script">Partnership enquiries: a contact channel has not yet been announced.</p></noscript>
 </body>
