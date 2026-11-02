@@ -20,6 +20,8 @@ No patient information is requested or stored. The main site's partnership form 
 
 ## Deployment
 
+The production custom domain is `trypurelyhearing.com`, registered with Network Solutions and served by GitHub Pages. Keep `dist/CNAME` in every Pages publication. The `www` record targets `jjin18.github.io`; the apex uses GitHub Pages' documented IP addresses.
+
 Vercel configuration is in `vercel.json`: the Purely Hearing project serves `dist/` as a static site, without an install or build command. Directory URLs preserve the demo's relative assets. The original Sites identity remains in `.openai/hosting.json`. GitHub Pages can also serve the contents of `dist/`, including `demo/` and `vendor/`, from the `gh-pages` branch. There is no runtime CDN dependency.
 
 See `VALIDATION.md` for checked behavior and limitations.
