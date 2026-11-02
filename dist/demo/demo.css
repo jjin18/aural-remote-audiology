@@ -4,3 +4,38 @@
 @media(max-width:760px){.demo-header{height:73px;padding:0 7%}.brand{font-size:28px}.demo-disclosure summary{font-size:10px;padding:4px 11px;min-height:30px}.back-link svg{width:20px;height:20px}main{padding:0 6%}.stage-navigation{gap:13px;padding:5px 0 15px}.stage-navigation .icon-control{width:44px;height:44px}.stage-navigation .icon-control svg{width:18px;height:18px}.session-visual{max-width:520px}.session-surface{padding:13px 13px 18px}.signal-visual{height:100px;gap:4px}.signal-visual i{width:1.5px}.chart-axis{font-size:24px}.chart-heading{font-size:10px;margin-bottom:18px}.chart-foot{font-size:10px;margin-top:13px}.chart-legend{font-size:11px;gap:13px}.session-completion{margin-top:15px}.surface-top{font-size:10px}.ambient-light{inset:-18% -30%;opacity:.85}.stage-area{margin-top:0;max-width:500px}.stage{gap:23px;min-height:83px}.readiness{gap:10px}.readiness-icon{width:50px;height:54px}.readiness-art{border-radius:16px}.readiness-art svg{width:23px;height:23px}.primary{width:52px;height:52px}.primary svg{width:22px;height:22px}.connection-scene{width:170px;height:52px;gap:17px}.control-deck{gap:16px;flex-wrap:wrap;max-width:450px}.ear-control{gap:8px}.ear-control label>span{height:41px;min-width:57px;font-size:12px}.test-controls{flex:0 0 100%;max-width:360px;gap:24px;justify-content:center}.frequency-control{flex-basis:119px}.frequency-control select{min-height:43px;font-size:12px}.level-control{max-width:150px}.level-control label{font-size:11px}.level-control input{margin-top:7px}.test-actions,.review-actions{gap:16px}.stage[data-panel="test"]{gap:21px;padding:12px 0 0}.test-actions .icon-control{width:47px;height:47px}.test-actions .primary{width:53px;height:53px}footer{margin-top:6px;padding-bottom:23px}.icon-control::after,.readiness-icon::after{font-size:10px;padding:7px 9px}.stage-navigation .icon-control::after{top:calc(100% + 3px)}}
 @media(max-width:360px){.stage-navigation{gap:10px}.session-surface{padding-left:8px;padding-right:8px}.signal-visual{height:85px}.chart-axis{font-size:26px}.stage{gap:16px}.readiness{gap:7px}.readiness-icon{width:45px;height:50px}.readiness-art svg{width:21px;height:21px}.primary{width:50px;height:50px}.connection-scene{width:156px}.test-controls{gap:18px}.frequency-control{flex-basis:111px}.level-control{max-width:130px}.test-actions{gap:15px}.icon-control::after,.readiness-icon::after{max-width:160px;text-align:center;white-space:normal;width:max-content}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.stage,.icon-control:hover:not(:disabled),.icon-control:focus-visible,.icon-control:active:not(:disabled){transform:none}.is-presenting .signal-visual{opacity:1}.is-connecting .connection-flow i{background:#b8c9eb60}}
+/* A continuous instrument; the controls dissolve without moving the composition. */
+.playback-controls{display:flex;justify-content:center;gap:4px;margin:0 auto 7px;position:relative;z-index:5;width:max-content;padding:2px 6px;border-radius:99px;background:#ffffff05}
+.playback-controls .icon-control{width:44px;height:44px;background:transparent}
+.playback-controls .icon-control svg{width:17px;height:17px}
+.stage-area{display:grid;min-height:156px}
+.stage{grid-area:1/1;align-self:center;animation:none}
+.stage[aria-hidden="true"]{pointer-events:none}
+.session-surface{transition:transform 1.4s var(--ease)}
+.ambient-light{transition:opacity 1.6s ease}
+body[data-stage="connect"] .ambient-light{opacity:1}
+body[data-channel="R"] .ambient-light i:first-child{opacity:.3}
+.ambient-light i{transition:opacity 1.5s ease}
+.chart-arrival{animation:point-arrival .9s var(--ease) both}
+.trace-left.chart-arrival,.trace-right.chart-arrival{stroke-dasharray:1;animation:trace-arrival 1s var(--ease) both}
+.walkthrough-paused .ambient-light i,.walkthrough-paused .signal-visual i,.walkthrough-paused .connection-flow i,.walkthrough-paused .connection-badge i,.walkthrough-paused .primary svg,.walkthrough-paused .chart-arrival,.tab-hidden .chart-arrival{animation-play-state:paused}
+@keyframes point-arrival{from{opacity:0}to{opacity:1}}
+@keyframes trace-arrival{from{stroke-dashoffset:1;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@media(min-width:761px) and (max-height:950px){.session-visual{max-width:580px}.session-surface{padding-top:10px;padding-bottom:10px}.signal-visual{height:70px}.stage-navigation{padding-bottom:7px}.stage-area{min-height:140px}.chart-heading{margin-bottom:12px}}
+@media(max-width:760px){.stage-area{min-height:210px}.playback-controls{margin-bottom:4px}.playback-controls .icon-control{height:44px}.signal-visual{height:78px}.stage-navigation{padding-bottom:8px}}
+@media(prefers-reduced-motion:reduce){.chart-arrival{animation:none}.trace-left.chart-arrival,.trace-right.chart-arrival{stroke-dashoffset:0}.session-surface{transition:none}}
+.is-walkthrough footer{display:none}
+@media(min-width:761px) and (max-height:950px){.demo-header{height:66px}.stage-navigation{padding:5px 0 8px}.stage-area{min-height:120px}.session-surface{padding:8px 28px}.signal-visual{height:55px}.session-surface>svg{max-height:clamp(160px,calc(100svh - 450px),350px)}.chart-heading{margin-bottom:10px}.chart-foot{margin-top:10px}.session-completion{margin-top:10px}.chart-axis{font-size:15px}}
+.signal-visual{gap:0}
+.signal-stream{display:flex;align-items:center;gap:6px;transform:translateX(-28px);transition:transform 2.3s cubic-bezier(.45,0,.15,1),opacity 1.5s ease;opacity:.7}
+.signal-stream+.signal-stream{transform:translateX(28px)}
+.is-connecting .signal-stream{transform:translateX(-3px);opacity:1}
+.is-connecting .signal-stream+.signal-stream{transform:translateX(3px)}
+.is-connected .signal-stream{transform:translateX(-3px);opacity:1}
+.is-connected .signal-stream+.signal-stream{transform:translateX(3px)}
+@media(max-width:760px){.signal-stream{gap:4px;transform:translateX(-18px)}.signal-stream+.signal-stream{transform:translateX(18px)}}
+@media(prefers-reduced-motion:reduce){.signal-stream{transition:opacity .4s ease;transform:none!important}}
+.no-response{--point-opacity:.45}
+@keyframes point-arrival{from{opacity:0}to{opacity:var(--point-opacity,1)}}
+@media(min-width:761px) and (max-height:950px){.session-surface>svg{max-height:clamp(150px,calc(100svh - 490px),350px)}}
+@media(max-width:760px) and (max-height:780px){.demo-header{height:62px}.signal-visual{height:60px}}

@@ -1,5 +1,15 @@
 # Validation — November 1, 2026
 
+## Automatic walkthrough update
+
+- Verified a fresh load reaches review with all twelve points, without clicks or keyboard focus changes. The completed frame holds until replay or interaction.
+- Verified pause holds both readiness and an eight-point test state; resume continues, and replay clears the session. Manual navigation cancels the tour, keeps its eight recorded points, and focuses the selected control.
+- Six clock tests cover timing, remaining-time pause/resume, stale timer cancellation, replay, callback interruptions, completion and browser timer binding. Together with the five session-model tests, all eleven pass.
+- Rechecked 320, 390, 768, 1024 and 1440 widths: no horizontal overflow. Controls remain within the opening viewport; stage space is reserved across transitions.
+- Full-motion transitions inspected through the ignored local media-preference fixture. Signal packets converge, panels fade, and only new chart segments animate. The normal browser's reduced-motion setting still auto-advances without spatial effects.
+- Hidden-tab pause/resume is implemented and source-reviewed using the tested clock; the available browser surface did not expose a real hidden-document state during tab switching.
+- Signup entry opens a separate dialog. With no sending endpoint configured, it collects no email and provides a working demo link. Sender preference is jiahui.k.jin@gmail.com. Automatic email, newsletter persistence and call booking are not live: a sending integration and booking URL are still required. No subscription or email delivery is claimed or tested.
+
 ## Landing page
 
 - Browser checked at 320 × 740, 390 × 844, 768 × 1024, 1024 × 768 and 1440 × 900. No horizontal overflow. Reviewed desktop and mobile opening, sticky clinical instrument and scroll transitions; refined the 320px headline and mobile chart placement.
